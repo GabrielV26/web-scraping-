@@ -20,6 +20,7 @@ Este projeto é uma aplicação web simples construída com Flask que realiza we
 
 ## Como ficou
 
+![image](https://github.com/user-attachments/assets/0694013a-91dd-4d94-b2cc-5f3d59824554)
 
 
 
