@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Scraping</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Web Scraping</h1>
+        <!-- Formulário para entrada da URL e seleção dos tipos de dados -->
+        <form method="POST">
+            <input type="text" name="url" placeholder="Insira a URL do site" required>
+
+            <fieldset>
+                <legend>O que você gostaria de extrair?</legend>
+                <!-- Checkboxes para selecionar os tipos de dados a serem extraídos -->
+                <label><input type="checkbox" name="data_types" value="titles" checked> Títulos</label><br>
+                <label><input type="checkbox" name="data_types" value="descriptions" checked> Descrições</label><br>
+                <label><input type="checkbox" name="data_types" value="images" checked> Imagens</label><br>
+                <label><input type="checkbox" name="data_types" value="links" checked> Links</label><br>
+                <label><input type="checkbox" name="data_types" value="meta" checked> Metadados</label><br>
+            </fieldset>
+
+            <button type="submit">Scrapear</button>
+        </form>
+
+        <!-- Exibição dos resultados do scraping -->
+        {% if data %}
+            <div class="results">
+                <!-- Exibição de mensagens de erro -->
+                {% if data.error %}
+                    <p class="error">{{ data.error }}</p>
+                {% else %}
+                    <!-- Exibição dos títulos extraídos -->
+                    {% if 'titles' in data %}
+                        <h2>Títulos:</h2>
+                        <ul>
+                            {% for title in data.titles %}
+                                <li>{{ title }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    <!-- Exibição das descrições extraídas -->
+                    {% if 'descriptions' in data %}
+                        <h2>Descrições:</h2>
+                        <ul>
+                            {% for desc in data.descriptions %}
+                                <li>{{ desc }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    <!-- Exibição das imagens extraídas -->
+                    {% if 'images' in data %}
+                        <h2>Imagens:</h2>
+                        <ul class="images">
+                            {% for img in data.images %}
+                                <li>
+                                    <a href="{{ img }}" target="_blank" rel="noopener noreferrer">
+                                        <img src="{{ img }}" alt="Imagem" style="max-width: 100px; max-height: 100px;">
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    <!-- Exibição dos links extraídos -->
+                    {% if 'links' in data %}
+                        <h2>Links:</h2>
+                        <ul>
+                            {% for link in data.links %}
+                                <li><a href="{{ link }}" target="_blank">{{ link }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    <!-- Exibição dos metadados extraídos -->
+                    {% if 'meta' in data %}
+                        <h2>Metadados:</h2>
+                        <p><strong>Descrição Meta:</strong> {{ data.description_meta }}</p>
+                        <p><strong>Palavras-chave Meta:</strong> {{ data.keywords_meta }}</p>
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
