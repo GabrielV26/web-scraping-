@@ -1,15 +1,21 @@
-/* Estilização geral do corpo da página */
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;
+    color: #212529;
     margin: 0;
-    padding: 0;
+    padding: 24px 16px;
+    line-height: 1.5;
 }
 
 .container {
+    width: 100%;
     max-width: 900px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 24px;
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
@@ -19,22 +25,29 @@ h1 {
     font-size: 2rem;
     color: #343a40;
     text-align: center;
-    margin-bottom: 20px;
+    margin: 0 0 24px;
 }
 
-/* Estilização do formulário */
 form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-input[type="text"] {
+input[type="url"] {
+    width: 100%;
+    min-width: 0;
     padding: 10px;
     border: 1px solid #ced4da;
     border-radius: 4px;
     font-size: 1rem;
-    width: 100%;
+}
+
+input:focus-visible,
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid #80bdff;
+    outline-offset: 2px;
 }
 
 fieldset {
@@ -58,44 +71,35 @@ button {
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
-    background-color: #007bff;
+    background-color: #0056b3;
     color: #ffffff;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.2s ease;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #003f82;
 }
 
-/* Estilização das mensagens de erro e sucesso */
 .error {
-    color: #dc3545;
+    color: #842029;
     background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
+    border: 1px solid #f5c2c7;
     padding: 10px;
     border-radius: 4px;
     margin-bottom: 20px;
 }
 
-.success {
-    color: #28a745;
-    background-color: #d4edda;
-    border: 1px solid #c3e6cb;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-}
-
-/* Estilização dos resultados do scraping */
 .results {
-    margin-top: 20px;
+    margin-top: 24px;
+    overflow-wrap: anywhere;
 }
 
 .results h2 {
-    font-size: 1.5rem;
+    font-size: 1.35rem;
     color: #495057;
+    margin-top: 24px;
 }
 
 .results ul {
@@ -109,8 +113,8 @@ button:hover {
 
 .images {
     display: flex;
-    flex-wrap: wrap; /* Permite que as imagens quebrem para a linha seguinte se necessário */
-    gap: 15px; /* Espaço entre as imagens */
+    flex-wrap: wrap;
+    gap: 15px;
     padding: 0;
 }
 
@@ -120,12 +124,21 @@ button:hover {
     border-radius: 4px;
 }
 
-/* Estilização de links */
 a {
-    color: #007bff;
+    color: #0056b3;
     text-decoration: none;
 }
 
 a:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 16px;
+    }
+
+    h1 {
+        font-size: 1.65rem;
+    }
 }
